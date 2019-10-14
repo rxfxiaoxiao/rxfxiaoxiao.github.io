@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>从正四菱柱到正n菱柱 | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="3d变换, css菱柱,">
+  
+
+  <meta name="description" content="最近有时间又在复习c3变换的东西，虽说之前也浅浅的学过，但是这次实践起来发现还是有很多东西没有真正的理解，而有些东西被淡忘在闲置的时光里。虽然现在有很多东西不会，在大前端的知识海洋里，自己宛若一只蝼蚁，但也不反感现在的状态。每天早上小跑一回儿，也许没啥用，但也不勉强自己，只求个积少成多。学习进度按自己的节奏来，虽说速度是慢了些，但也无愧于心，只求今天比昨天好。每天学习一点点，重拾那些丢失的记忆。。">
+<meta name="keywords" content="3d变换, css菱柱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从正四菱柱到正n菱柱">
+<meta property="og:url" content="http://yoursite.com/2019/08/06/css-prism/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近有时间又在复习c3变换的东西，虽说之前也浅浅的学过，但是这次实践起来发现还是有很多东西没有真正的理解，而有些东西被淡忘在闲置的时光里。虽然现在有很多东西不会，在大前端的知识海洋里，自己宛若一只蝼蚁，但也不反感现在的状态。每天早上小跑一回儿，也许没啥用，但也不勉强自己，只求个积少成多。学习进度按自己的节奏来，虽说速度是慢了些，但也无愧于心，只求今天比昨天好。每天学习一点点，重拾那些丢失的记忆。。">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="http://yoursite.com/images/css-prism/1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-prism/2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-prism/3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-prism/4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-prism/5.jpg">
+<meta property="og:updated_time" content="2019-10-14T08:57:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从正四菱柱到正n菱柱">
+<meta name="twitter:description" content="最近有时间又在复习c3变换的东西，虽说之前也浅浅的学过，但是这次实践起来发现还是有很多东西没有真正的理解，而有些东西被淡忘在闲置的时光里。虽然现在有很多东西不会，在大前端的知识海洋里，自己宛若一只蝼蚁，但也不反感现在的状态。每天早上小跑一回儿，也许没啥用，但也不勉强自己，只求个积少成多。学习进度按自己的节奏来，虽说速度是慢了些，但也无愧于心，只求今天比昨天好。每天学习一点点，重拾那些丢失的记忆。。">
+<meta name="twitter:image" content="http://yoursite.com/images/css-prism/1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140719691-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0f67f83b889096df8f66b088e868d350";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、认识变换"><span class="toc-text">一、认识变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、transform"><span class="toc-text">1、transform</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、translate-x轴上平移的距离-y轴上平移的距离"><span class="toc-text">2、translate(x轴上平移的距离, y轴上平移的距离)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、rotate-x轴上旋转的角度-y轴上旋转的角度"><span class="toc-text">3、rotate(x轴上旋转的角度, y轴上旋转的角度)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、perspective-和-transform-style"><span class="toc-text">二、perspective 和 transform-style</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、perspective"><span class="toc-text">1、perspective</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、transform-style"><span class="toc-text">2、transform-style</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、尝试实现正四菱柱"><span class="toc-text">三、尝试实现正四菱柱</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、准备基础素材："><span class="toc-text">1、准备基础素材：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、尝试变换"><span class="toc-text">2、尝试变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、正确变换"><span class="toc-text">3、正确变换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、了解正菱柱的特点"><span class="toc-text">四、了解正菱柱的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念："><span class="toc-text">概念：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#了解正多边形的特点："><span class="toc-text">了解正多边形的特点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用js简单封装一个生成正n菱柱的插件"><span class="toc-text">用js简单封装一个生成正n菱柱的插件</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-css-prism" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">从正四菱柱到正n菱柱</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.08.06</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>rxfxiaoxiao</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>最近有时间又在复习c3变换的东西，虽说之前也浅浅的学过，但是这次实践起来发现还是有很多东西没有真正的理解，而有些东西被淡忘在闲置的时光里。虽然现在有很多东西不会，在大前端的知识海洋里，自己宛若一只蝼蚁，但也不反感现在的状态。每天早上小跑一回儿，也许没啥用，但也不勉强自己，只求个积少成多。学习进度按自己的节奏来，虽说速度是慢了些，但也无愧于心，只求今天比昨天好。每天学习一点点，重拾那些丢失的记忆。。。</p>
+<h1 id="一、认识变换"><a href="#一、认识变换" class="headerlink" title="一、认识变换"></a>一、认识变换</h1><p>大概好些年前，我们看的电影还是2d形式的，现在3d电影已是遍布全国，给人身临其境的体验。在css的世界里，也有2d，3d的概念，2d顾名思义就是两个维度(x,y)，两个维度构成一个面，而在3d的世界里比2d多了一个维度(z)，给人展现立体的效果。小时候学习立体几何的时候最先接触的是正方体，长方体，菱柱这些。。。那如何在浏览器中构建这样的立体效果呢？那先来了解几个属性。</p>
+<h2 id="1、transform"><a href="#1、transform" class="headerlink" title="1、transform"></a>1、transform</h2><p>transform 是c3中的变换属性，通过这个属性，我们可以对一个元素进行平移，旋转，放大缩小等操作。</p>
+<p>取值:</p>
+<ul>
+<li>变换函数 translate(), rotate(), scale(), skew(), matrix()…</li>
+<li>none</li>
+</ul>
+<h2 id="2、translate-x轴上平移的距离-y轴上平移的距离"><a href="#2、translate-x轴上平移的距离-y轴上平移的距离" class="headerlink" title="2、translate(x轴上平移的距离, y轴上平移的距离)"></a>2、translate(x轴上平移的距离, y轴上平移的距离)</h2><p>平移函数，用来定义元素从一个位置平移到另一个位置。针对不同的方向还衍生出来了其他一系列的平移函数，比如translateX(), translateY(), translateZ(),还有针对3d空间衍生出来的translate3d()</p>
+<h2 id="3、rotate-x轴上旋转的角度-y轴上旋转的角度"><a href="#3、rotate-x轴上旋转的角度-y轴上旋转的角度" class="headerlink" title="3、rotate(x轴上旋转的角度, y轴上旋转的角度)"></a>3、rotate(x轴上旋转的角度, y轴上旋转的角度)</h2><p>旋转函数，用来定义元素旋转变换。和translate函数类似，也针对不同方向不同维度衍生出一系列函数，比如rotateX(),rotateY(),rotateZ(),rotate3d()</p>
+<h1 id="二、perspective-和-transform-style"><a href="#二、perspective-和-transform-style" class="headerlink" title="二、perspective 和 transform-style"></a>二、perspective 和 transform-style</h1><p>实现一个长方体，无非是对元素的旋转平移，但实际上除了掌握旋转平移，还需要了解另外两个很重要的属性，即perspective和transform-style</p>
+<h2 id="1、perspective"><a href="#1、perspective" class="headerlink" title="1、perspective"></a>1、perspective</h2><p>用来定义观察者与被观察的物体的距离（即观察者到z轴的距离）。就像在现实世界里，离物体越远，看到的物体越小，离物体越近看到的物体越大。</p>
+<h2 id="2、transform-style"><a href="#2、transform-style" class="headerlink" title="2、transform-style"></a>2、transform-style</h2><p>transform-style 用来定义变换的形式，是3d变换还是2d变换</p>
+<p>取值：</p>
+<ul>
+<li>flat 默认值，2d变换</li>
+<li>preserve-3d 3d变换</li>
+</ul>
+<h1 id="三、尝试实现正四菱柱"><a href="#三、尝试实现正四菱柱" class="headerlink" title="三、尝试实现正四菱柱"></a>三、尝试实现正四菱柱</h1><p>具备上述的知识点，就来尝试下如何实现四菱柱。先来分析下，四菱柱除去上下底面，还有四个面，我们可以将四个面堆叠在一起，这样可以统一一个变换中心，然后针对每一个面做旋转平移处理。</p>
+<h2 id="1、准备基础素材："><a href="#1、准备基础素材：" class="headerlink" title="1、准备基础素材："></a>1、准备基础素材：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">    &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;front&quot;&gt;1&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;right&quot;&gt;2&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;back&quot;&gt;3&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;left&quot;&gt;4&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">    body &#123;</span><br><span class="line">        background: #ccc;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        perspective: 400px;</span><br><span class="line">    &#125;</span><br><span class="line">    .box &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 300px;</span><br><span class="line">        margin: 200px auto;</span><br><span class="line">        position: relative;</span><br><span class="line">        transform-style: preserve-3d;</span><br><span class="line">    &#125;</span><br><span class="line">    .box div &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 150px;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 50px;</span><br><span class="line">        left: 50px;</span><br><span class="line">        opacity: .8;</span><br><span class="line">        color: #fff;</span><br><span class="line">        transform-origin: center center;</span><br><span class="line">    &#125;</span><br><span class="line">    .front &#123;</span><br><span class="line">        background: red;</span><br><span class="line">    &#125;</span><br><span class="line">    .right &#123;</span><br><span class="line">        background: green;</span><br><span class="line">    &#125;</span><br><span class="line">    .back &#123;</span><br><span class="line">        background: purple;</span><br><span class="line">    &#125;</span><br><span class="line">    .left &#123;</span><br><span class="line">        background: orange;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>得到如下效果：<br><img src="/images/css-prism/1.jpg" alt></p>
+<h2 id="2、尝试变换"><a href="#2、尝试变换" class="headerlink" title="2、尝试变换"></a>2、尝试变换</h2><p>准备好素材，就要开始变换四菱柱的每个面了，通过平行变化，正四菱柱的正面其实直接进行平移就ok了，左侧面需要先旋转一个角度，然后再做平移，嗯。。。旋转，应该关于谁旋转呀，不用想，就知道是关于Y轴旋转，旋转多少度呢？当然是旋转90度，只有旋转90度才能与正面垂直呀,然后再向右(x轴)平移1/2元素的宽度？来试下？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">    &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;front&quot;&gt;1&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;right&quot;&gt;2&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;back&quot;&gt;3&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;left&quot;&gt;4&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">    body &#123;</span><br><span class="line">        background: #ccc;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        perspective: 400px;</span><br><span class="line">    &#125;</span><br><span class="line">    .box &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 300px;</span><br><span class="line">        margin: 200px auto;</span><br><span class="line">        position: relative;</span><br><span class="line">        transform-style: preserve-3d;</span><br><span class="line">    &#125;</span><br><span class="line">    .box div &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 150px;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 50px;</span><br><span class="line">        left: 50px;</span><br><span class="line">        opacity: .8;</span><br><span class="line">        color: #fff;</span><br><span class="line">        transform-origin: center center;</span><br><span class="line">    &#125;</span><br><span class="line">    .front &#123;</span><br><span class="line">        background: red;</span><br><span class="line">        transform: translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    .right &#123;</span><br><span class="line">        background: green;</span><br><span class="line">        transform: rotateY(90deg) translateX(50px)</span><br><span class="line">    &#125;</span><br><span class="line">    .back &#123;</span><br><span class="line">        background: purple;</span><br><span class="line">    &#125;</span><br><span class="line">    .left &#123;</span><br><span class="line">        background: orange;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>得到如下效果：<br><img src="/images/css-prism/2.jpg" alt><br>咦？为啥只看到了正面这一个面有变化，右侧也做了设置的呀，为啥看不出变化？不知道是否有宝宝也和我一样，把坐标轴想当然的以为是静止不变的，就像数学里面那样坐标轴是固定的，所有的面共用一个坐标轴。<br><img src="/images/css-prism/3.jpg" style="width: 40%; height: auto; display: block; margin:0 auto;"></p>
+<p>实际上在web中，每个面都有独立的坐标轴，当面发生旋转的时候，坐标轴也会跟着旋转，所以在上述例子中我们把右侧的面旋转了90度之后，右侧面的坐标轴也跟着旋转了90度，以为右侧面的x轴还是向右，实际上旋转之后x轴已经变成向后了，而z轴向右（z轴始终垂直元素所在的平面），所以我们想要得到期待的效果，是需要translateZ(50px),而不是translateX(50px)。</p>
+<p>另外可能还有个关于旋转的角度的点有些不好理解，日常生活中，我们常常顺时针旋转的度数为正，逆时针旋转的度数为负，而在web中，我们遵守左手法则，左手的大拇指指向坐标轴的方向，四指所指的方向就是正方向，所以此处按常规思维以为右侧面是应该沿y轴旋转（逆时针旋转90deg）的，实际上根据左手法则，y轴的逆时针方向才是正方向，所以此处是rotateY(90deg), 而不是rotateY(-90deg)。</p>
+<h2 id="3、正确变换"><a href="#3、正确变换" class="headerlink" title="3、正确变换"></a>3、正确变换</h2><p>了解了上述的知识点之后，正四菱柱就变的易如反掌了，那就把剩余的代码补上呗。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">    &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;box&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;front&quot;&gt;1&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;right&quot;&gt;2&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;back&quot;&gt;3&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;left&quot;&gt;4&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">    body &#123;</span><br><span class="line">        background: #ccc;</span><br><span class="line">    &#125;</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        perspective: 400px;</span><br><span class="line">    &#125;</span><br><span class="line">    .box &#123;</span><br><span class="line">        width: 200px;</span><br><span class="line">        height: 300px;</span><br><span class="line">        margin: 200px auto;</span><br><span class="line">        position: relative;</span><br><span class="line">        transform-style: preserve-3d;</span><br><span class="line">    &#125;</span><br><span class="line">    .box div &#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 150px;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 50px;</span><br><span class="line">        left: 50px;</span><br><span class="line">        opacity: .8;</span><br><span class="line">        color: #fff;</span><br><span class="line">        transform-origin: center center;</span><br><span class="line">    &#125;</span><br><span class="line">    .front &#123;</span><br><span class="line">        background: red;</span><br><span class="line">        transform: translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    .right &#123;</span><br><span class="line">        background: green;</span><br><span class="line">        transform: rotateY(90deg) translateZ(50px)</span><br><span class="line">    &#125;</span><br><span class="line">   .back &#123;</span><br><span class="line">        background: purple;</span><br><span class="line">        transform: rotateY(180deg) translateZ(50px)</span><br><span class="line">    &#125;</span><br><span class="line">    .left &#123;</span><br><span class="line">        background: orange;</span><br><span class="line">        transform: rotateY(270deg) translateZ(50px)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/css-prism/4.jpg" alt><br>当然也可以添加点旋转动效呀，直接上<a href="https://codepen.io/rxfxiaoxiao/full/bXYBjb" target="_blank" rel="noopener">codepen</a>呀~</p>
+<h1 id="四、了解正菱柱的特点"><a href="#四、了解正菱柱的特点" class="headerlink" title="四、了解正菱柱的特点"></a>四、了解正菱柱的特点</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>底面是正多边形的直棱柱叫做正棱柱。正棱柱是侧棱都垂直于底面，且底面是正多边形的棱柱</p>
+<h2 id="了解正多边形的特点："><a href="#了解正多边形的特点：" class="headerlink" title="了解正多边形的特点："></a>了解正多边形的特点：</h2><p>1、直接引用张大神博客上的图片<br><img src="/images/css-prism/5.jpg" alt></p>
+<p>2、看到这张图片是否瞬间觉得豁然开朗，有了它再加上上面的前面的知识点，我们可以创造正n菱柱，来，说干就干，为加深印象，徒手就从四菱柱写到了正7菱柱（写了个彩虹色嘛，七色斑斓），一起看看：</p>
+<ul>
+<li><p>五菱柱：<br>直接上<a href="https://codepen.io/rxfxiaoxiao/full/EqbNpw" target="_blank" rel="noopener">codepen</a>呀~</p>
+</li>
+<li><p>六菱柱：<br>直接上<a href="https://codepen.io/rxfxiaoxiao/full/bXYBjb" target="_blank" rel="noopener">codepen</a>呀~</p>
+</li>
+<li><p>七菱柱<br>直接上<a href="https://codepen.io/rxfxiaoxiao/pen/bXYBxG" target="_blank" rel="noopener">codepen</a>呀~</p>
+</li>
+</ul>
+<h2 id="用js简单封装一个生成正n菱柱的插件"><a href="#用js简单封装一个生成正n菱柱的插件" class="headerlink" title="用js简单封装一个生成正n菱柱的插件"></a>用js简单封装一个生成正n菱柱的插件</h2><p>感觉每次手动去写去计算还是不够爽，所以就动手自己封装一个可以生成正n菱柱的插件</p>
+<p>直接上<a href="https://codepen.io/rxfxiaoxiao/full/xvYzBg" target="_blank" rel="noopener">codepen</a>呀~</p>
+<p>其实也没有什么特别的说，主要还是加深理解。</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持晓晓</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/wechat.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/alipay.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/07/18/css-gradient/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: 'b867de18e5c6bd120958',
+  clientSecret: '50281b98c560c94df1d020f6632232901e13bf5d',
+  repo: 'blog-comments',
+  owner: 'rxfxiaoxiao',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: md5(location.pathname),
+  admin: ['rxfxiaoxiao'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

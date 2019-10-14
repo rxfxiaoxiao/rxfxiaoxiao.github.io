@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>搬瓦工搭建一个梯子（BandwagonHost+shadowsocks） | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="搬瓦工,科学上网,">
+  
+
+  <meta name="description" content="概述作为一名程序员，我们时常需要查阅一些国外的技术文档，但是在国内我们无法直接访问到国外网站，所以这时候我们就需要搭建一个梯子，通过这个梯子去查看墙外的东西。 几种方式 蓝灯是我最先使用的vpn软件，开源，每月有几百兆的免费流量，当然也有付费版本。 后来也使用过expressVPN，大概用了一个月左右，速度还是很快的，但是个人觉得价格有些偏高了。 再后面同事推荐了BandwagonHost，相对而">
+<meta name="keywords" content="搬瓦工,科学上网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搬瓦工搭建一个梯子（BandwagonHost+shadowsocks）">
+<meta property="og:url" content="http://yoursite.com/2019/06/10/bandwagonHost/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述作为一名程序员，我们时常需要查阅一些国外的技术文档，但是在国内我们无法直接访问到国外网站，所以这时候我们就需要搭建一个梯子，通过这个梯子去查看墙外的东西。 几种方式 蓝灯是我最先使用的vpn软件，开源，每月有几百兆的免费流量，当然也有付费版本。 后来也使用过expressVPN，大概用了一个月左右，速度还是很快的，但是个人觉得价格有些偏高了。 再后面同事推荐了BandwagonHost，相对而">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg5.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg6.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg7.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg8.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg9.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/sd1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/sd2.jpg">
+<meta property="og:updated_time" content="2019-10-14T06:44:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搬瓦工搭建一个梯子（BandwagonHost+shadowsocks）">
+<meta name="twitter:description" content="概述作为一名程序员，我们时常需要查阅一些国外的技术文档，但是在国内我们无法直接访问到国外网站，所以这时候我们就需要搭建一个梯子，通过这个梯子去查看墙外的东西。 几种方式 蓝灯是我最先使用的vpn软件，开源，每月有几百兆的免费流量，当然也有付费版本。 后来也使用过expressVPN，大概用了一个月左右，速度还是很快的，但是个人觉得价格有些偏高了。 再后面同事推荐了BandwagonHost，相对而">
+<meta name="twitter:image" content="http://yoursite.com/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140719691-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0f67f83b889096df8f66b088e868d350";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种方式"><span class="toc-text">几种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#购买BandwagonHost服务"><span class="toc-text">购买BandwagonHost服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用putty搭建ss服务器"><span class="toc-text">使用putty搭建ss服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方案"><span class="toc-text">方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用putty"><span class="toc-text">使用putty</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#putty下载地址"><span class="toc-text">putty下载地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用步骤"><span class="toc-text">使用步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置shadowsocks"><span class="toc-text">配置shadowsocks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-text">相关链接</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-bandwagonHost" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">搬瓦工搭建一个梯子（BandwagonHost+shadowsocks）</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.06.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>rxfxiaoxiao</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/科学上网/">科学上网</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>作为一名程序员，我们时常需要查阅一些国外的技术文档，但是在国内我们无法直接访问到国外网站，所以这时候我们就需要搭建一个梯子，通过这个梯子去查看墙外的东西。</p>
+<h2 id="几种方式"><a href="#几种方式" class="headerlink" title="几种方式"></a>几种方式</h2><ul>
+<li>蓝灯是我最先使用的vpn软件，开源，每月有几百兆的免费流量，当然也有付费版本。</li>
+<li>后来也使用过expressVPN，大概用了一个月左右，速度还是很快的，但是个人觉得价格有些偏高了。</li>
+<li>再后面同事推荐了BandwagonHost，相对而言，个人觉得性价比不错，价格也在能接受的范围内。</li>
+</ul>
+<h2 id="购买BandwagonHost服务"><a href="#购买BandwagonHost服务" class="headerlink" title="购买BandwagonHost服务"></a>购买BandwagonHost服务</h2><p>访问地址:</p>
+<ul>
+<li><a href="https://bandwagonhost.com/" target="_blank" rel="noopener">官方地址</a>，貌似需要翻墙才能访问，所以没有翻墙的情况下可以访问下面的地址。</li>
+<li><a href="https://bwh88.net/" target="_blank" rel="noopener">搬瓦工官网中国镜像站</a>。</li>
+</ul>
+<p>购买流程</p>
+<ul>
+<li><p>第一步：点击VPS Hosting按钮，进入到服务套餐面板，根据需要选择套餐，点击order。<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg1.jpg" alt><br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg2.jpg" alt></p>
+</li>
+<li><p>第二步：点击Add to cart<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg3.jpg" alt></p>
+</li>
+<li><p>第三步： 点击checkout,填写用户信息，如果之前有填过这些信息也可以直接点击登录，然后选择支付方式，微信/支付宝都支持，勾选同意，然后点击complete order。<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg4.jpg" alt><br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg5.jpg" alt></p>
+</li>
+<li><p>第四步： 点击Pay Now，会根据你选择的支付方式调出对应的支付界面。<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg6.jpg" alt></p>
+</li>
+<li><p>第五步： 支付成功之后我们可以登录注册邮箱，看到一些使用步骤，还有登录信息。返回到官网，点击My Services,可以看到刚刚购买的套餐，点KiwiVM Control Panel， 进入到kiwiVM界面，在主界面，我们可以看到服务器的ip地址，SSH端口号，以及操作系统等信息。<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg7.jpg" alt><br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg8.jpg" alt></p>
+</li>
+<li><p>第六步：为安全起见我们可以点击Root password modification按钮去修改密码，不过这个密码一定要记住，后面还需要用到。点击start，开启服务。<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/bwg9.jpg" alt></p>
+</li>
+</ul>
+<h2 id="使用putty搭建ss服务器"><a href="#使用putty搭建ss服务器" class="headerlink" title="使用putty搭建ss服务器"></a>使用putty搭建ss服务器</h2><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p>原本的KiwiVM Control Panel侧边导航栏有一键安装Shadowsocks server的按钮，但是自2018年起，按钮就被隐藏了，网上查阅了各种资料，得到如下几种方案（如果没有Shadowsocks server按钮的话可以进行参考）：</p>
+<ul>
+<li><p>方案1： 浏览器打开网址<code>https://kiwivm.64clouds.com/main-exec.php?mode=extras_shadowsocks，直接进入到安装Shadowsocks server</code>的界面，但是我在我的电脑上打开是一片空白，所以我采用第二种方案，各位看官可以都试着尝试下。</p>
+</li>
+<li><p>方案2：下载putty软件，通过putty搭建ss服务器</p>
+</li>
+</ul>
+<h2 id="使用putty"><a href="#使用putty" class="headerlink" title="使用putty"></a>使用putty</h2><h3 id="putty下载地址"><a href="#putty下载地址" class="headerlink" title="putty下载地址"></a>putty下载地址</h3><ul>
+<li><a href="https://pan.baidu.com/s/13p39wsC58im99nxYKOyQzA" target="_blank" rel="noopener">windows下载地址</a></li>
+<li><a href="https://www.ttrar.com/mac/soft/1295.html" target="_blank" rel="noopener">mac下载地址</a></li>
+</ul>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ul>
+<li>第一步：打开putty界面，输入服务器IP及端口（在KiwiVM Control Panel可以查看到），点击open，弹出的弹窗选择是，进入putty命令窗口。</li>
+<li>第二步：输入root，然后粘贴vps的密码，回车。</li>
+<li>第三步：输入wget — no-check-certificate -O shadowsocks.sh <a href="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</a></li>
+<li>如果报错wget: command not found，那么执行yum install wget,再执行第三步。</li>
+<li>第四步：键入chmod +x shadowsocks.sh</li>
+<li>第五步：键入./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</li>
+<li>第六步：设置密码和端口号</li>
+<li>第七步：选择加密方式： 输入7，回车，然后就坐等安装完成。</li>
+<li>第八步： 安装完成之后会显示一段信息（这段信息后面会应用到配置shadowsocks客户端）：<ul>
+<li>Your Server IP ip地址</li>
+<li>Your Server Port 端口号</li>
+<li>Your Password 密码</li>
+<li>Your Encryption Method 加密方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="配置shadowsocks"><a href="#配置shadowsocks" class="headerlink" title="配置shadowsocks"></a>配置shadowsocks</h3><ul>
+<li>下载shadowsocks客户端，<a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases" target="_blank" rel="noopener">https://github.com/shadowsocks/ShadowsocksX-NG/releases</a></li>
+<li>打开shadowsocks进行配置，点击服务器进行服务器设置<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/sd1.jpg" alt></li>
+<li>在服务器设置面板点击加号，进行新服务器的配置，输入前面我们保留下来的信息，然后点击确定，就可以开始任性上网啦~~<br><img src="/images/%E6%90%AC%E7%93%A6%E5%B7%A5%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A2%AF%E5%AD%90/sd2.jpg" alt></li>
+</ul>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="https://www.diycode.cc/topics/1247" target="_blank" rel="noopener">搬瓦工一键搭建 ss 手把手教你搭建自己的 ss 翻墙服务器</a><br><a href="https://www.bwgyhw.cn/" target="_blank" rel="noopener">搬瓦工优惠网</a><br><a href="https://www.freeluffy.com/bandwagon-host-ss/" target="_blank" rel="noopener">最新搬瓦工搭建ss教程：后台一键搞定无需手动安装</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持晓晓</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/wechat.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/alipay.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/05/27/flex-layout/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/06/13/css-mbl/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: 'b867de18e5c6bd120958',
+  clientSecret: '50281b98c560c94df1d020f6632232901e13bf5d',
+  repo: 'blog-comments',
+  owner: 'rxfxiaoxiao',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: md5(location.pathname),
+  admin: ['rxfxiaoxiao'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

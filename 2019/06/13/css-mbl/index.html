@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>css实现毛玻璃的效果 | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="css毛玻璃特效,">
+  
+
+  <meta name="description" content="概述前段时间在开发公司项目时，需要使用到如下图所示特效，我们先来分析一下这张图，背景是一张清晰的图片，然后最左侧就像是盖了一层毛玻璃，透过这块玻璃看背景图片给人呈现出一种隐隐约约模糊的视觉效果。初看这种效果时，我们不能想当然的以为只是在背景上面盖了一块有透明度的白色区块，纯粹的透明度是不会出现这种模糊的效果，那如图效果该如何实现呢？感兴趣的看官请继续往下读。  初识Filter（滤镜）属性1、作用">
+<meta name="keywords" content="css毛玻璃特效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css实现毛玻璃的效果">
+<meta property="og:url" content="http://yoursite.com/2019/06/13/css-mbl/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述前段时间在开发公司项目时，需要使用到如下图所示特效，我们先来分析一下这张图，背景是一张清晰的图片，然后最左侧就像是盖了一层毛玻璃，透过这块玻璃看背景图片给人呈现出一种隐隐约约模糊的视觉效果。初看这种效果时，我们不能想当然的以为只是在背景上面盖了一块有透明度的白色区块，纯粹的透明度是不会出现这种模糊的效果，那如图效果该如何实现呢？感兴趣的看官请继续往下读。  初识Filter（滤镜）属性1、作用">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-5.jpg">
+<meta property="og:image" content="http://yoursite.com/images/css-mbl/mbl-6.jpg">
+<meta property="og:updated_time" content="2019-10-14T08:57:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css实现毛玻璃的效果">
+<meta name="twitter:description" content="概述前段时间在开发公司项目时，需要使用到如下图所示特效，我们先来分析一下这张图，背景是一张清晰的图片，然后最左侧就像是盖了一层毛玻璃，透过这块玻璃看背景图片给人呈现出一种隐隐约约模糊的视觉效果。初看这种效果时，我们不能想当然的以为只是在背景上面盖了一块有透明度的白色区块，纯粹的透明度是不会出现这种模糊的效果，那如图效果该如何实现呢？感兴趣的看官请继续往下读。  初识Filter（滤镜）属性1、作用">
+<meta name="twitter:image" content="http://yoursite.com/images/css-mbl/mbl-1.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140719691-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0f67f83b889096df8f66b088e868d350";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识Filter（滤镜）属性"><span class="toc-text">初识Filter（滤镜）属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用filter-blur-实现毛玻璃特效"><span class="toc-text">使用filter:blur 实现毛玻璃特效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#想当然的误入歧途"><span class="toc-text">想当然的误入歧途</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#错误案例1："><span class="toc-text">错误案例1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#错误案例2："><span class="toc-text">错误案例2：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正确的使用filter-blur"><span class="toc-text">正确的使用filter:blur</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-css-mbl" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">css实现毛玻璃的效果</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.06.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>rxfxiaoxiao</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>前段时间在开发公司项目时，需要使用到如下图所示特效，我们先来分析一下这张图，背景是一张清晰的图片，然后最左侧就像是盖了一层毛玻璃，透过这块玻璃看背景图片给人呈现出一种隐隐约约模糊的视觉效果。初看这种效果时，我们不能想当然的以为只是在背景上面盖了一块有透明度的白色区块，纯粹的透明度是不会出现这种模糊的效果，那如图效果该如何实现呢？感兴趣的看官请继续往下读。</p>
+<p><img src="/images/css-mbl/mbl-1.jpg" alt></p>
+<h2 id="初识Filter（滤镜）属性"><a href="#初识Filter（滤镜）属性" class="headerlink" title="初识Filter（滤镜）属性"></a>初识Filter（滤镜）属性</h2><p>1、作用： 用于调整图像，背景和边框的渲染</p>
+<p>2、兼容写法：</p>
+<ul>
+<li>filter: xxx;</li>
+<li>-webkit-filter: xxx;</li>
+</ul>
+<p>3、滤镜函数</p>
+<ul>
+<li>url()</li>
+<li>blur() 设置高斯模糊，值越大越模糊</li>
+<li>brightness() 默认是1，调整图片亮度，100%-&gt;0% 值越小越暗,为0%时全黑；100%是临界点，图片不发生变化，超过100%，值越大越亮；</li>
+<li>contrast 调整对比度 默认为1，100%是临界点，图片不发生变化，0%为全黑，超过100%值</li>
+<li>drop-shadow(offset-x[必须], offset-y[必须], blur-radius[可选], color[可选]) 给图像设置一个阴影效果，参数分别为x偏移量，y偏移量，模糊半径，阴影颜色。</li>
+<li>grayscale() 将图片转化为灰度图像</li>
+<li>hue-rotate() 给图像进行色相旋转。0度时图片无变化</li>
+<li>invert() 反转输入图像。默认是0，图片无变化，取值为0-100%，100%为完全反转。</li>
+<li>opacity() 转化图片的透明程度，0% 完全透明，100% 图像无变化。</li>
+<li>saturate() 转化图像饱和度。0% -&gt; 完全不饱和， 100% -&gt; 图像无变化。超过100% -&gt; 更高的饱和度。</li>
+<li>sepia() 将图片转换为褐色。 默认为0，取值为0-100%；为0时图像无变化，为100%时完全是深褐色的。</li>
+</ul>
+<h2 id="使用filter-blur-实现毛玻璃特效"><a href="#使用filter-blur-实现毛玻璃特效" class="headerlink" title="使用filter:blur 实现毛玻璃特效"></a>使用filter:blur 实现毛玻璃特效</h2><h3 id="想当然的误入歧途"><a href="#想当然的误入歧途" class="headerlink" title="想当然的误入歧途"></a>想当然的误入歧途</h3><h4 id="错误案例1："><a href="#错误案例1：" class="headerlink" title="错误案例1："></a>错误案例1：</h4><p>首先我们初步分析下结构应该是怎样的？</p>
+<ul>
+<li>一个主容器</li>
+<li>存放图片的容器</li>
+<li>左侧那块模糊遮罩</li>
+</ul>
+<p>嗯，那对应的结构应该就是如下了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;img src=&quot;./images/omni.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">    &lt;i&gt;&lt;/i&gt;</span><br><span class="line">&lt;/div&gt; </span><br></pre></td></tr></table></figure>
+
+<p>那样式该怎样写呢？</p>
+<p>初步设想: 给左侧的遮罩来一个绝对定位，盖在背景图片上面，然后遮罩的背景为白色，设置filter属性，指定blur模糊半径值以及opacity的值，这样能否透过这个遮罩呈现一个模糊的效果呢？说做就做，请看下方代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">html结构：</span><br><span class="line"> &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">     &lt;img src=&quot;./images/omni.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">     &lt;i&gt;&lt;/i&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css样式：</span><br><span class="line">     .wrap &#123;</span><br><span class="line">         margin: 100px auto;</span><br><span class="line">         width: 750px;</span><br><span class="line">         height: 400px;</span><br><span class="line">         position: relative;</span><br><span class="line">         overflow: hidden;</span><br><span class="line">     &#125;</span><br><span class="line">     img &#123;</span><br><span class="line">         width: 100%;</span><br><span class="line">         height: auto;</span><br><span class="line">         display: block;</span><br><span class="line">     &#125;</span><br><span class="line">     i &#123;</span><br><span class="line">         position: absolute;</span><br><span class="line">         width: 400px;</span><br><span class="line">         height: 400px;</span><br><span class="line">         z-index: 3;</span><br><span class="line">         top: 0;</span><br><span class="line">         left: 0;</span><br><span class="line">         background: #fff;</span><br><span class="line">         filter: opacity(.8) blur(5px);</span><br><span class="line">     &#125; </span><br></pre></td></tr></table></figure>
+
+<p>保存查看一下，浏览器运行效果如下：<br><img src="/images/css-mbl/mbl-2.jpg" alt></p>
+<p>咦，对比下和我们期望的样子，好像差了不止一点点啊！那我们究竟是错在哪儿了，我们再回过头来分析下这个例子，首先filter:blur()是让定义的元素起作用，在这里，我们将filter:blur()定义在左侧遮罩上面了，所以导致了遮罩呈现模糊效果，但是背景不模糊的现象，但是我们实际想要的效果是让背景图片的左侧部分模糊。那我们怎么去修正它呢？或者说filter:blur应该定义在哪里呢？</p>
+<h4 id="错误案例2："><a href="#错误案例2：" class="headerlink" title="错误案例2："></a>错误案例2：</h4><p>上述的错误案例让我们意识到，什么元素需要模糊就把filter:blur设置到这个元素上去，而不是想当然的设置一个遮罩，那既然如此，我们是否应该把filter:blur设置到背景图片上去呢？那就试试看吧！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">    &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">        &lt;img src=&quot;./images/omni.jpg&quot; alt=&quot;&quot;&gt;</span><br><span class="line">        &lt;i&gt;&lt;/i&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        margin: 100px auto;</span><br><span class="line">        width: 750px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        position: relative;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">    img &#123;</span><br><span class="line">        width: 100%;</span><br><span class="line">        height: auto;</span><br><span class="line">        display: block;</span><br><span class="line">        filter: blur(5px)</span><br><span class="line">    &#125;</span><br><span class="line">    i &#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        width: 400px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        z-index: 3;</span><br><span class="line">        top: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">        background: #fff;</span><br><span class="line">        opacity: .5;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存一下运行，结果如下:<br><img src="/images/css-mbl/mbl-3.jpg" alt></p>
+<p>很遗憾，依旧不是我们期待的样子，因为我们将filter:blur()直接设置到背景图片上面，所以导致整张背景图片都是模糊的了。</p>
+<h3 id="正确的使用filter-blur"><a href="#正确的使用filter-blur" class="headerlink" title="正确的使用filter:blur"></a>正确的使用filter:blur</h3><p>上述的经验告诉我们直接将filter:blur()设置到背景图片上面是行不通的，无法保证一边模糊一边清晰，肯定需要分两个块做，一个块不做处理，用来展示图片，一个块用来存放模糊的区域，这让我们忍不住想起background属性，更加惊喜的想到background的cover属性，接下来思路就清晰了：</p>
+<ul>
+<li>用一个容器存放背景图片，不做任何处理</li>
+<li>遮罩容器固定宽高，使用absolute定位固定在背景图片的左侧，同时遮罩容器也用背景图片做背景，设置background-position:left center,然后设置高斯模糊，让遮罩上模糊的区域和背景容器右侧部分连贯起来，形成一张图片左侧模糊右侧清晰的视觉效果。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">    &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;img-box&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;i&gt;&lt;/i&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">    .wrap &#123;</span><br><span class="line">        margin: 100px auto;</span><br><span class="line">        width: 750px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .img-box &#123;</span><br><span class="line">        width: 750px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background: url(&apos;./images/omni.jpg&apos;) no-repeat center center /auto 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    i &#123;</span><br><span class="line">        position: absolute;</span><br><span class="line">        width: 350px;</span><br><span class="line">        height: 400px;</span><br><span class="line">        background: url(&apos;./images/omni.jpg&apos;) no-repeat left center / cover;</span><br><span class="line">        z-index: 3;</span><br><span class="line">        top: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">        filter: blur(5px);</span><br><span class="line">    &#125;   </span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/images/css-mbl/mbl-4.jpg" alt><br>看起来好像还不错，一边模糊一边清晰，不过模糊区域好像有些溢出了，那就我们就给主容器设置溢出隐藏嘛</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">html:</span><br><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;img-box&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;i&gt;&lt;/i&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">css:</span><br><span class="line">.wrap &#123;</span><br><span class="line">    margin: 100px auto;</span><br><span class="line">    width: 750px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    position: relative;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.img-box &#123;</span><br><span class="line">    width: 750px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    background: url(&apos;./images/omni.jpg&apos;) no-repeat center center / 100% auto;</span><br><span class="line">&#125;</span><br><span class="line">i &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    width: 350px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    background: url(&apos;./images/omni.jpg&apos;) no-repeat left center / cover;</span><br><span class="line">    z-index: 3;</span><br><span class="line">    top: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    filter: blur(5px);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/images/css-mbl/mbl-5.jpg" alt><br>这下看起来很不错哦，不过貌似还需要做最后一步哦，做一个白色透明层放在模糊区域上面，让效果变得更加明显</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> html: </span><br><span class="line"> &lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;img-box&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;i&gt;&lt;/i&gt;</span><br><span class="line">    &lt;span&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;   </span><br><span class="line"></span><br><span class="line"> css:</span><br><span class="line"></span><br><span class="line"> .wrap &#123;</span><br><span class="line">     margin: 100px auto;</span><br><span class="line">     width: 750px;</span><br><span class="line">     height: 400px;</span><br><span class="line">     position: relative;</span><br><span class="line">     overflow: hidden;</span><br><span class="line"> &#125;</span><br><span class="line"> .img-box &#123;</span><br><span class="line">     width: 750px;</span><br><span class="line">     height: 400px;</span><br><span class="line">     background: url(&apos;./images/omni.jpg&apos;) no-repeat center center / 100% auto;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> i &#123;</span><br><span class="line">     position: absolute;</span><br><span class="line">     width: 350px;</span><br><span class="line">     height: 400px;</span><br><span class="line">     background: url(&apos;./images/omni.jpg&apos;) no-repeat left center / cover;</span><br><span class="line">     z-index: 3;</span><br><span class="line">     top: 0;</span><br><span class="line">     left: 0;</span><br><span class="line">     filter: blur(10px);</span><br><span class="line"> &#125;</span><br><span class="line"> span &#123;</span><br><span class="line">     position: absolute;</span><br><span class="line">     width: 350px;</span><br><span class="line">     height: 400px;  </span><br><span class="line">     z-index: 5;</span><br><span class="line">     top: 0;</span><br><span class="line">     left: 0;</span><br><span class="line">     background: #fff;</span><br><span class="line">     opacity: .2;</span><br><span class="line"> &#125;     </span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/images/css-mbl/mbl-6.jpg" alt><br>这样看起来完全没有问题了哦，效果是不是棒棒哒？</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持晓晓</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/wechat.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/alipay.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/06/10/bandwagonHost/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/06/28/css-variables/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: 'b867de18e5c6bd120958',
+  clientSecret: '50281b98c560c94df1d020f6632232901e13bf5d',
+  repo: 'blog-comments',
+  owner: 'rxfxiaoxiao',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: md5(location.pathname),
+  admin: ['rxfxiaoxiao'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
